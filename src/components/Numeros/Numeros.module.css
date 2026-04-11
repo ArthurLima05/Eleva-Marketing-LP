@@ -1,0 +1,131 @@
+.numeros {
+  background: #0a0a0a;
+  padding: 8vw 0 0;
+  overflow: hidden;
+}
+
+.header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 60px 5vw;
+}
+
+.headerLabel {
+  display: block;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  color: #444;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.headerTitle {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.headerTitle strong {
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.001em;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid #1e1e1e;
+}
+
+.item {
+  padding: 5vw 4vw 6vw;
+  border-right: 1px solid #1e1e1e;
+  border-bottom: 1px solid #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.item:nth-child(even) {
+  border-right: none;
+}
+
+.item:nth-child(3),
+.item:nth-child(4) {
+  border-bottom: none;
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ffffff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.item:hover::before {
+  transform: scaleX(1);
+}
+
+.numberWrap {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.number {
+  font-size: clamp(3.5rem, 5.5vw, 6.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.suffix {
+  font-size: clamp(1.5rem, 2.5vw, 3rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.label {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: #555;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .item {
+    border-right: none;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .item:last-child {
+    border-bottom: none;
+  }
+
+  .header {
+    padding: 0 24px 40px;
+  }
+}

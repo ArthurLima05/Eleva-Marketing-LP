@@ -1,0 +1,44 @@
+.problema {
+  background: #111111;
+  padding: 10vw 0;
+}
+
+.inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 32px;
+  align-items: start;
+  padding: 48px 0;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.item:first-child {
+  border-top: 1px solid #2a2a2a;
+}
+
+.ordinal {
+  font-size: 0.72rem;
+  color: #444;
+  letter-spacing: 0.2em;
+  padding-top: 8px;
+}
+
+.text {
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  color: #ffffff;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .problema {
+    padding: 80px 0;
+  }
+}

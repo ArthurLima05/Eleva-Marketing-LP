@@ -1,0 +1,254 @@
+/* ─── Seção externa: dá altura para o scroll scrubbing ─────────────── */
+.hero {
+  position: relative;
+  height: 185vh;
+  background: var(--color-bg-primary);
+}
+
+/* ─── Wrapper sticky: viewport fixo enquanto o usuário scrolla ──────── */
+.heroSticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ─── Canvas de fundo fullscreen ────────────────────────────────────── */
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+}
+
+/* ─── Vignette inteligente ───────────────────────────────────────────── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0.5) 65%,
+    rgba(0, 0, 0, 0.88) 100%
+  );
+}
+
+/* ─── Logo topo esquerdo ─────────────────────────────────────────────── */
+.logo {
+  position: absolute;
+  top: -2rem;
+  left: 1rem;
+  z-index: 10;
+}
+
+.logoImg {
+  height: 200px;
+  width: auto;
+  opacity: 0.92;
+}
+
+/* ─── Conteúdo central ──────────────────────────────────────────────── */
+.content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 24px;
+}
+
+/* ─── Bloco de título ───────────────────────────────────────────────── */
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05em;
+}
+
+/* ─── Linha 1: "MARCAS INVISÍVEIS NÃO" ─────────────────────────────── */
+.titleLine1 {
+  display: block;
+  font-size: clamp(1.6rem, 3.8vw, 3.2rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.007em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+  line-height: 1.15;
+  mix-blend-mode: difference;
+}
+
+/* ─── Linha 2: "VENDEM" ──────────────────────────────────────────────── */
+.titleLine2 {
+  display: block;
+  font-size: clamp(4.5rem, 12vw, 10rem);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.001em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 2px;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+  line-height: 0.88;
+  mix-blend-mode: difference;
+}
+
+/* ─── Palavra animável — usada em ambas as linhas ───────────────────── */
+.word {
+  display: inline-block;
+  opacity: 0;
+  will-change: transform, opacity;
+  margin-right: 0.28em;
+}
+
+.word:last-child {
+  margin-right: 0;
+}
+
+/* ─── Palavra de destaque (VENDEM) ──────────────────────────────────── */
+.wordHighlight {
+  display: inline-block;
+  opacity: 0;
+  will-change: transform, opacity;
+  margin-right: 0.28em;
+}
+
+.wordHighlight:last-child {
+  margin-right: 0;
+}
+
+/* ─── Subtítulo ─────────────────────────────────────────────────────── */
+.subtitle {
+  font-family: var(--font-family-base);
+  font-size: clamp(0.62rem, 1.05vw, 0.82rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+  margin-top: 1.75rem;
+  max-width: 480px;
+  line-height: 1.85;
+  text-align: center;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+}
+
+/* ─── Botão CTA ─────────────────────────────────────────────────────── */
+.ctaButton {
+  margin-top: 3rem;
+  padding: 16px 44px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: transparent;
+  color: #ffffff;
+  font-family: var(--font-family-base);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  opacity: 0;
+  will-change: transform;
+}
+
+.ctaButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #ffffff;
+}
+
+/* ─── Scroll indicator ──────────────────────────────────────────────── */
+.scrollIndicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: pulseFade 2.2s ease-in-out infinite;
+  z-index: 10;
+}
+
+.scrollText {
+  font-family: var(--font-family-base);
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.scrollLine {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.55),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+@keyframes pulseFade {
+  0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  50%       { opacity: 0.25; transform: translateX(-50%) translateY(6px); }
+}
+
+/* ─── Flash branco no final do scroll ──────────────────────────────── */
+.flashOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+  transition: opacity 0.1s linear;
+}
+
+/* ─── Mobile ────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .logo {
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+
+  .logoImg {
+    height: 28px;
+  }
+
+  .titleLine1 {
+    font-size: clamp(1.1rem, 5.5vw, 1.6rem);
+  }
+
+  .titleLine2 {
+    font-size: clamp(3.5rem, 18vw, 5.5rem);
+  }
+
+  .subtitle {
+    font-size: 0.68rem;
+    max-width: 90vw;
+    letter-spacing: 0.12em;
+  }
+
+  .ctaButton {
+    cursor: pointer;
+    padding: 14px 32px;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+  }
+
+  .scrollIndicator {
+    display: none;
+  }
+}

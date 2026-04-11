@@ -1,0 +1,118 @@
+.processo {
+  background: #0a0a0a;
+  padding: 10vw 0;
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.sectionLabel {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: #444;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-style: italic;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 4rem;
+}
+
+.sectionTitle strong {
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.001em;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+
+.connector {
+  position: absolute;
+  top: 20px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    #333 0,
+    #333 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  transform-origin: left center;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  padding-top: 52px;
+  position: relative;
+}
+
+.stepNum {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #555;
+  margin-bottom: 8px;
+  position: relative;
+  top: -52px;
+}
+
+.stepDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.stepName {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.stepDesc {
+  font-size: 0.8rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .processo {
+    padding: 80px 0;
+  }
+
+  .steps {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .steps::before {
+    display: none;
+  }
+}
