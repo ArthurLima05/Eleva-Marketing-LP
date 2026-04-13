@@ -1,0 +1,110 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0;
+  transition: background 0.4s ease, border-color 0.4s ease;
+  /* Dark theme — sobre a hero preta */
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+}
+
+/* Quando o fundo é escuro (hero) */
+.navbar[data-theme="dark"] {
+  background: transparent;
+  border-bottom-color: rgba(255, 255, 255, 0);
+}
+
+/* Quando o fundo é claro (seções brancas) */
+.navbar[data-theme="light"] {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.logoWrap {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logoImg {
+  height: 150px;
+  width: auto;
+  transition: filter 0.4s ease;
+}
+
+/* Dark: logo branco */
+.navbar[data-theme="dark"] .logoImg {
+  filter: brightness(0) invert(1);
+}
+
+/* Light: logo preto */
+.navbar[data-theme="light"] .logoImg {
+  filter: brightness(0);
+}
+
+/* CTA Button */
+.ctaBtn {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Dark: botão com borda branca */
+.navbar[data-theme="dark"] .ctaBtn {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.navbar[data-theme="dark"] .ctaBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+/* Light: botão preto sólido */
+.navbar[data-theme="light"] .ctaBtn {
+  background: #0a0a0a;
+  color: #ffffff;
+  border: 1px solid #0a0a0a;
+}
+
+.navbar[data-theme="light"] .ctaBtn:hover {
+  background: #222222;
+}
+
+@media (max-width: 768px) {
+  .inner {
+    padding: 0 20px;
+    height: 56px;
+  }
+
+  .logoImg {
+    height: 90px;
+  }
+
+  .ctaBtn {
+    font-size: 0.6rem;
+    padding: 8px 16px;
+    letter-spacing: 0.15em;
+  }
+}

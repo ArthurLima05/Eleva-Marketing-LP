@@ -87,6 +87,7 @@ function framePath(i: number): string {
  * @param totalFrames Número exato de frames em /public/frames/
  * @param onFullyOpen Callback quando obturador está ≥97% aberto
  * @param onClose     Callback quando obturador volta abaixo de 93%
+ * @param onProgress  Callback opcional chamado a cada update com progress 0→1
  * @returns Função de cleanup para o useEffect
  */
 export function setupCanvasScrollScrubbing(
@@ -94,13 +95,17 @@ export function setupCanvasScrollScrubbing(
   trigger: HTMLElement,
   totalFrames: number,
   onFullyOpen: () => void,
-  onClose: () => void
+  onClose: () => void,
+  onProgress?: (progress: number) => void
 ): () => void {
   const ctx = canvas.getContext('2d')!;
   if (!ctx) return () => undefined;
 
-  const EAGER_COUNT = Math.min(10, totalFrames);
-  const LERP_FACTOR = 0.1; // suavização do progresso entre frames
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+
+  const EAGER_COUNT = Math.min(40, totalFrames);
+  const LERP_FACTOR = 0.08; // suavização do progresso entre frames
 
   // Array de imagens pré-alocado — nunca cria new Image() durante o scroll
   const frames: HTMLImageElement[] = new Array(totalFrames);
@@ -112,21 +117,30 @@ export function setupCanvasScrollScrubbing(
   let rafRunning = false;
   let currentFrameIdx = 0;
 
+  // Dimensões cacheadas — evita layout thrashing no rAF
+  let cachedW = 0;
+  let cachedH = 0;
+
   // ── Redimensionar canvas para preencher o elemento (respeitando dpr) ────
   function resizeCanvas(): void {
     const W = canvas.offsetWidth;
     const H = canvas.offsetHeight;
     if (W === 0 || H === 0) return;
 
+    cachedW = W;
+    cachedH = H;
+
     const dpr = window.devicePixelRatio || 1;
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
     // setTransform permite usar coordenadas CSS nos drawImage calls
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
 
     // Redesenha o frame atual após resize
     if (frames[currentFrameIdx]?.complete) {
-      drawCover(ctx, frames[currentFrameIdx], W, H);
+      drawCover(ctx, frames[currentFrameIdx], cachedW, cachedH);
     }
   }
 
@@ -137,16 +151,20 @@ export function setupCanvasScrollScrubbing(
 
     function loop(): void {
       const diff = targetProgress - lerpedProgress;
-      if (Math.abs(diff) > 0.0005) {
+      if (Math.abs(diff) > 0.0003) {
         lerpedProgress += diff * LERP_FACTOR;
-        currentFrameIdx = Math.round(lerpedProgress * (totalFrames - 1));
-        const frame = frames[currentFrameIdx];
-        if (frame?.complete) {
-          drawCover(ctx, frame, canvas.offsetWidth, canvas.offsetHeight);
+        const nextIdx = Math.round(lerpedProgress * (totalFrames - 1));
+        // Só redesenha se o frame mudou — evita drawImage desnecessário
+        if (nextIdx !== currentFrameIdx || lerpedProgress !== targetProgress) {
+          currentFrameIdx = nextIdx;
+          const frame = frames[currentFrameIdx];
+          if (frame?.complete && cachedW > 0) {
+            drawCover(ctx, frame, cachedW, cachedH);
+          }
         }
         rafId = requestAnimationFrame(loop);
       } else {
-        // Progresso estabilizou — para o loop até o próximo scroll
+        lerpedProgress = targetProgress;
         rafRunning = false;
       }
     }
@@ -198,6 +216,8 @@ export function setupCanvasScrollScrubbing(
       targetProgress = self.progress;
       startRaf();
 
+      if (onProgress) onProgress(self.progress);
+
       if (!openTriggered && self.progress >= 0.97) {
         openTriggered = true;
         onFullyOpen();
@@ -206,6 +226,12 @@ export function setupCanvasScrollScrubbing(
         openTriggered = false;
         onClose();
       }
+    },
+    onLeave: () => {
+      if (onProgress) onProgress(1);
+    },
+    onLeaveBack: () => {
+      if (onProgress) onProgress(0);
     },
   });
 

@@ -1,58 +1,236 @@
 .depoimentos {
-  background: #ffffff;
-  padding: 10vw 0;
+  background: #0a0a0a;
+  padding: 8vw 0 6vw;
+  overflow: hidden;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  max-width: 1000px;
+.header {
+  padding: 0 60px 4vw;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 40px;
 }
 
+.label {
+  display: block;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  color: #444;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.115em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.title strong {
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.001em;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+}
+
+/* ── TRACK — o container que scrolla ── */
+.track {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 24px;
+  padding: 0 8vw;
+  cursor: grab;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track:active {
+  cursor: grabbing;
+}
+
+/* ── CARD ── */
 .card {
-  border: 1px solid #e0e0e0;
-  padding: 48px 40px;
+  flex: 0 0 380px;
+  scroll-snap-align: center;
+  margin-right: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #1e1e1e;
+  overflow: hidden;
 }
 
-.quote {
-  font-size: 5rem;
-  line-height: 0.5;
-  color: #e0e0e0;
-  font-family: serif;
-  margin-bottom: 1rem;
+/* ── VÍDEO ── */
+.videoWrap {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #111;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.05);
+}
+
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+}
+
+.resultTag {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ── CONTEÚDO ── */
+.content {
+  padding: 32px;
+  background: #111111;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
 }
 
 .text {
-  font-size: 1rem;
-  color: #333;
+  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  color: #cccccc;
   line-height: 1.7;
   font-style: italic;
-  margin-bottom: 2rem;
+  letter-spacing: 0;
+}
+
+.authorRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid #222;
+  padding-top: 20px;
 }
 
 .author {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #0a0a0a;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  color: #ffffff;
 }
 
 .role {
-  font-size: 0.72rem;
-  color: #999;
-  margin-top: 2px;
+  font-size: 0.68rem;
+  color: #555;
+  letter-spacing: 0.05em;
+  margin-top: 3px;
+}
+
+/* ── DOTS ── */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 2.5rem;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #333;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  padding: 0;
+}
+
+.dotActive {
+  background: #ffffff;
+  transform: scale(1.3);
+}
+
+/* ── SETAS — desktop only ── */
+.arrows {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 8vw;
+  margin-top: 1.5rem;
+}
+
+.arrow {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #333;
+  background: transparent;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.arrow:hover:not(:disabled) {
+  background: #1a1a1a;
+  border-color: #555;
+}
+
+.arrow:disabled {
+  opacity: 0.25;
+  cursor: default;
 }
 
 @media (max-width: 768px) {
-  .depoimentos {
-    padding: 80px 0;
+  .header {
+    padding: 0 24px 6vw;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
+  .track {
+    padding: 0 12vw;
+    gap: 16px;
+  }
+
+  .card {
+    flex: 0 0 75vw;
+  }
+
+  .content {
+    padding: 24px;
+  }
+
+  .arrows {
+    display: none;
+  }
+
+  .dots {
+    margin-top: 2rem;
   }
 }

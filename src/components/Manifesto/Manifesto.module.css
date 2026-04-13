@@ -2,6 +2,13 @@
   background: #ffffff;
   padding: 8vw 0 7vw;
   overflow: hidden;
+  margin-bottom: 12vw;
+}
+
+@media (max-width: 768px) {
+  .manifesto {
+    margin-bottom: 50vw;
+  }
 }
 
 .labelRow {

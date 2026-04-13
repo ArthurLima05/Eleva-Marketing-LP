@@ -1,0 +1,99 @@
+.marquee {
+  overflow: hidden;
+  padding: 18px 0;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+
+/* DARK theme — fundo preto, texto branco (sobre seções escuras) */
+.marquee[data-theme="dark"] {
+  background: #0a0a0a;
+  border-color: #1e1e1e;
+}
+
+/* LIGHT theme — fundo branco, texto preto (sobre seções claras) */
+.marquee[data-theme="light"] {
+  background: #ffffff;
+  border-color: #e8e8e8;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: scroll var(--speed, 30s) linear infinite;
+}
+
+/* Pausa no hover — toque de interatividade elegante */
+.marquee:hover .track {
+  animation-play-state: paused;
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0 20px;
+  transition: opacity 0.3s ease;
+}
+
+.marquee[data-theme="dark"] .item {
+  color: #555;
+}
+
+.marquee[data-theme="light"] .item {
+  color: #aaa;
+}
+
+/* Hover no item individual ilumina */
+.marquee[data-theme="dark"] .item:hover {
+  color: #ffffff;
+}
+
+.marquee[data-theme="light"] .item:hover {
+  color: #0a0a0a;
+}
+
+/* Separador entre itens — quadrado rotacionado 45° */
+.dot {
+  width: 4px;
+  height: 4px;
+  flex-shrink: 0;
+  transform: rotate(45deg);
+}
+
+.marquee[data-theme="dark"] .dot {
+  background: #333;
+}
+
+.marquee[data-theme="light"] .dot {
+  background: #ddd;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Mobile — velocidade um pouco mais rápida */
+@media (max-width: 768px) {
+  .item {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    padding: 0 14px;
+  }
+
+  .marquee {
+    padding: 14px 0;
+  }
+}

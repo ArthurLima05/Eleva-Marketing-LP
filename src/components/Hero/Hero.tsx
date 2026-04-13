@@ -1,9 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
-  animateHeroTitleIn,
-  animateFadeIn,
   setupCanvasScrollScrubbing,
   setupScrollIndicatorHide,
   setupSubtitleCtaColorTransition,
@@ -30,11 +28,6 @@ export default function Hero() {
   const ctaRef = useRef<HTMLButtonElement>(null);
   const flashRef = useRef<HTMLDivElement>(null);
 
-  const line1Refs = useRef<HTMLSpanElement[]>([]);
-  const line2HighlightRefs = useRef<HTMLSpanElement[]>([]);
-
-  const [shutterOpen, setShutterOpen] = useState(false);
-
   // ─── Canvas scrubbing + scroll indicator ────────────────────────────
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -46,8 +39,36 @@ export default function Hero() {
       canvas,
       hero,
       TOTAL_FRAMES,
-      () => setShutterOpen(true),
-      () => setShutterOpen(false)
+      () => undefined,
+      () => undefined,
+      (progress: number) => {
+        // Flash: começa em 80%, completo em 100%
+        if (flashRef.current) {
+          const flashStart = 0.80;
+          const p = Math.max(0, Math.min(1,
+            (progress - flashStart) / (1 - flashStart)
+          ));
+          flashRef.current.style.opacity = String(p);
+        }
+
+        // Fade do conteúdo: some entre 20% e 70%
+        const content = document.querySelector('[class*="content_"]') as HTMLElement;
+        if (content) {
+          const fadeStart = 0.2;
+          const fadeEnd = 0.7;
+          const fadeProgress = Math.max(0, Math.min(1,
+            (progress - fadeStart) / (fadeEnd - fadeStart)
+          ));
+          content.style.opacity = String(1 - fadeProgress);
+        }
+
+        // Body: branco só quando flash está completo
+        if (progress >= 0.99) {
+          document.body.style.backgroundColor = '#ffffff';
+        } else if (progress < 0.75) {
+          document.body.style.backgroundColor = '#0a0a0a';
+        }
+      }
     );
 
     const cleanupColorTransition =
@@ -65,75 +86,17 @@ export default function Hero() {
       ? setupScrollIndicatorHide(indicator)
       : () => undefined;
 
-    const safetyTimer = setTimeout(() => setShutterOpen(true), 2500);
-
-    // ── Flash branco + transição do body ──────────────────────────────
-    const flashSt = ScrollTrigger.create({
-      trigger: hero,
-      start: 'top top',
-      end: () => '+=' + Math.round(window.innerHeight * 0.85),
-      onUpdate: (self) => {
-        const scrollProgress = self.progress;
-
-        if (flashRef.current) {
-          const flashStart = 0.75;
-          const flashProgress = Math.max(
-            0,
-            Math.min(1, (scrollProgress - flashStart) / (1 - flashStart))
-          );
-          flashRef.current.style.opacity = String(flashProgress);
-        }
-
-        if (scrollProgress >= 0.98) {
-          document.body.style.backgroundColor = '#ffffff';
-          document.body.style.transition = 'background-color 0.3s ease';
-        } else {
-          document.body.style.backgroundColor = '#0a0a0a';
-        }
-      },
-    });
-
     return () => {
       cleanupScrub();
       cleanupColorTransition();
       cleanupIndicator();
-      flashSt.kill();
-      clearTimeout(safetyTimer);
+      if (flashRef.current) flashRef.current.style.opacity = '0';
       document.body.style.backgroundColor = '#0a0a0a';
       document.body.style.transition = '';
+      const content = document.querySelector('[class*="content_"]') as HTMLElement;
+      if (content) content.style.opacity = '1';
     };
   }, []);
-
-  // ─── Animação de entrada do texto quando o obturador abre ───────────
-  const hasTitleBeenShownRef = useRef(false);
-
-  useEffect(() => {
-    const allWords = [
-      ...line1Refs.current,
-      ...line2HighlightRefs.current,
-    ].filter(Boolean) as HTMLElement[];
-
-    const fadeTargets = [subtitleRef.current, ctaRef.current].filter(
-      Boolean
-    ) as HTMLElement[];
-
-    if (!shutterOpen) {
-      // Ao voltar para a hero, restaura visibilidade (após ctx.revert do cleanup)
-      if (hasTitleBeenShownRef.current) {
-        gsap.set([...allWords, ...fadeTargets], { opacity: 1, y: '0px' });
-      }
-      return;
-    }
-
-    hasTitleBeenShownRef.current = true;
-
-    const ctx = gsap.context(() => {
-      animateHeroTitleIn(allWords);
-      if (fadeTargets.length) animateFadeIn(fadeTargets, 0.75);
-    });
-
-    return () => ctx.revert();
-  }, [shutterOpen]);
 
   // ─── Cursor magnético — desktop apenas ──────────────────────────────
   useEffect(() => {
@@ -155,38 +118,21 @@ export default function Hero() {
         {/* Camada 2.5 — flash branco no final do scroll */}
         <div ref={flashRef} className={styles.flashOverlay} />
 
-        {/* Logo topo esquerdo */}
-        <div className={styles.logo}>
-          <img
-            src="/src/assets/logo/eleva-logo.png"
-            alt="Eleva Marketing"
-            className={styles.logoImg}
-          />
-        </div>
-
         {/* Camada 3 — conteúdo centralizado */}
         <div className={styles.content}>
           <div className={styles.titleBlock}>
 
             <p className={styles.titleLine1}>
-              {LINE_1_WORDS.map((word, i) => (
-                <span
-                  key={word}
-                  ref={(el) => { if (el) line1Refs.current[i] = el; }}
-                  className={styles.word}
-                >
+              {LINE_1_WORDS.map((word) => (
+                <span key={word} className={styles.word}>
                   {word}
                 </span>
               ))}
             </p>
 
             <p className={styles.titleLine2}>
-              {LINE_2_HIGHLIGHT.map((word, i) => (
-                <span
-                  key={word}
-                  ref={(el) => { if (el) line2HighlightRefs.current[i] = el; }}
-                  className={styles.wordHighlight}
-                >
+              {LINE_2_HIGHLIGHT.map((word) => (
+                <span key={word} className={styles.wordHighlight}>
                   {word}
                 </span>
               ))}

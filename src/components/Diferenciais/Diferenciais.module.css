@@ -1,0 +1,148 @@
+.diferenciais {
+  background: #ffffff;
+  padding: 10vw 0;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8vw;
+  align-items: start;
+}
+
+/* ── COLUNA ESQUERDA ── */
+.left {
+  position: sticky;
+  top: 100px;
+}
+
+.label {
+  display: block;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  color: #999;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.title {
+  font-size: clamp(2rem, 3.8vw, 3.5rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.115em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+.title strong {
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.001em;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+  display: block;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.7;
+  letter-spacing: 0;
+  max-width: 340px;
+}
+
+/* ── COLUNA DIREITA ── */
+.right {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 24px;
+  padding: 40px 0;
+  border-bottom: 1px solid #e8e8e8;
+  align-items: start;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.item:first-child {
+  border-top: 1px solid #e8e8e8;
+}
+
+.item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.num {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: #bbb;
+  padding-top: 4px;
+  font-weight: 500;
+}
+
+.itemContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.itemTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0a0a0a;
+  letter-spacing: 0.02em;
+}
+
+.itemDesc {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.7;
+  letter-spacing: 0;
+}
+
+/* ── HOVER no item ── */
+.item:hover .num {
+  color: #0a0a0a;
+  transition: color 0.3s ease;
+}
+
+.item:hover .itemTitle {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 0 24px;
+  }
+
+  .left {
+    position: static;
+  }
+
+  .subtitle {
+    max-width: 100%;
+  }
+
+  .item {
+    grid-template-columns: 36px 1fr;
+    gap: 16px;
+    padding: 28px 0;
+  }
+}
