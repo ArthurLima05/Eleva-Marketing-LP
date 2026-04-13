@@ -339,18 +339,20 @@ export function animateProcesso(
   steps: HTMLElement[],
   trigger: HTMLElement
 ): void {
+  const isMobile = window.innerWidth <= 768
+
   gsap.fromTo(
     connector,
-    { scaleX: 0 },
+    isMobile ? { scaleY: 0 } : { scaleX: 0 },
     {
-      scaleX: 1,
+      ...(isMobile ? { scaleY: 1 } : { scaleX: 1 }),
       ease: 'none',
-      transformOrigin: 'left center',
+      transformOrigin: isMobile ? 'top center' : 'left center',
       scrollTrigger: {
         trigger,
-        start: 'top 70%',
-        end: 'top 20%',
-        scrub: 0.6,
+        start: 'top 80%',
+        end: isMobile ? 'bottom 15%' : 'center 30%',
+        scrub: 0.8,
       },
     }
   );

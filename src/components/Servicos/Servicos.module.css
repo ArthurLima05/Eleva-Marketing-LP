@@ -109,13 +109,7 @@
 .cardContent {
   position: relative;
   z-index: 1;
-  padding: 28px 28px 28px 28px;
-  transition: padding 0.45s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-.card:hover .cardContent {
-  padding-top: 56px;
-  padding-bottom: 56px;
+  padding: 36px 28px;
 }
 
 .cardName {
@@ -132,28 +126,26 @@
   color: #ffffff;
 }
 
-/* Descrição: oculta por padrão, expande no hover */
+/*
+  Descrição: sempre no fluxo (height não muda), apenas opacity/transform animam.
+  Isso garante que o card nunca muda de altura no hover, evitando empurrar seções abaixo.
+*/
 .cardDesc {
   font-size: 0.92rem;
   color: rgba(255, 255, 255, 0.85);
   line-height: 1.65;
-  max-height: 0;
-  overflow: hidden;
+  margin-top: 14px;
   opacity: 0;
-  margin-top: 0;
-  transition:
-    max-height 0.45s ease 0.1s,
-    opacity 0.35s ease 0.2s,
-    margin-top 0.3s ease 0.1s;
+  transform: translateY(6px);
+  transition: opacity 0.35s ease 0.15s, transform 0.35s ease 0.15s;
 }
 
 .card:hover .cardDesc {
-  max-height: 200px;
   opacity: 1;
-  margin-top: 14px;
+  transform: translateY(0);
 }
 
-/* ── MOBILE: tudo sempre visível ── */
+/* ── MOBILE: tudo sempre visível, hover desativado ── */
 @media (max-width: 768px) {
   .servicos {
     padding: 80px 0;
@@ -163,16 +155,26 @@
     padding: 0 24px;
   }
 
-  /* Esconde a barrinha no mobile */
+  /* Barrinha oculta */
   .card::before {
     display: none;
   }
 
-  /* Imagem estática acima do conteúdo */
+  /* Sem hover na barrinha */
+  .card:hover::before {
+    display: none;
+  }
+
+  /* Imagem estática acima do conteúdo, sem reveal */
   .cardMedia {
     clip-path: none !important;
     position: relative;
     height: 180px;
+  }
+
+  /* Sem reveal de imagem no hover */
+  .card:hover .cardMedia {
+    clip-path: none !important;
   }
 
   .cardOverlay {
@@ -183,16 +185,27 @@
     padding: 20px 0 24px;
   }
 
+  /* Título: cor fixa, nunca fica branco */
   .cardName {
     font-size: 1.05rem;
-    color: #0a0a0a;
+    color: #0a0a0a !important;
   }
 
-  /* Descrição sempre visível no mobile */
+  .card:hover .cardName {
+    color: #0a0a0a !important;
+  }
+
+  /* Descrição sempre visível, cor escura */
   .cardDesc {
-    max-height: 300px !important;
     opacity: 1 !important;
-    margin-top: 10px !important;
+    transform: none !important;
+    color: #555 !important;
+    font-size: 0.88rem;
+  }
+
+  .card:hover .cardDesc {
+    opacity: 1 !important;
+    transform: none !important;
     color: #555 !important;
   }
 }

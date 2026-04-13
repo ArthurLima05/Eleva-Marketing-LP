@@ -1,12 +1,12 @@
 .processo {
   background: #0a0a0a;
-  padding: 10vw 0;
+  padding: 14vw 0;
 }
 
 .inner {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 60px;
 }
 
 .sectionLabel {
@@ -23,7 +23,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #ffffff;
-  margin-bottom: 4rem;
+  margin-bottom: 6rem;
 }
 
 .sectionTitle strong {
@@ -35,6 +35,7 @@
   text-decoration-thickness: 1px;
 }
 
+/* ── GRID DESKTOP ── */
 .steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -42,77 +43,142 @@
   position: relative;
 }
 
+/* Linha conectora horizontal — animada via scaleX no scroll */
 .connector {
   position: absolute;
-  top: 20px;
+  top: 25px;           /* alinha com o centro do dot: top 19px + raio 6px = 25px */
   left: 12.5%;
   right: 12.5%;
-  height: 1px;
+  height: 2px;
   background: repeating-linear-gradient(
     to right,
-    #333 0,
-    #333 6px,
-    transparent 6px,
-    transparent 12px
+    #666 0,
+    #666 10px,
+    transparent 10px,
+    transparent 20px
   );
   transform-origin: left center;
 }
 
+/* ── STEP ── */
 .step {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 0 20px;
-  padding-top: 52px;
+  padding: 0 28px;
+  padding-top: 76px;
   position: relative;
 }
 
 .stepNum {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
   color: #555;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   position: relative;
-  top: -52px;
+  top: -76px;            /* flutua acima do dot */
 }
 
 .stepDot {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: #ffffff;
+  border: 2px solid #555;
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.06);
   position: absolute;
-  top: 16px;
+  top: 19px;             /* centro: 19 + 6 = 25px, alinha com connector top */
   left: 50%;
   transform: translateX(-50%);
 }
 
 .stepName {
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #ffffff;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 
 .stepDesc {
-  font-size: 0.8rem;
+  font-size: 0.88rem;
   color: #666;
-  line-height: 1.5;
+  line-height: 1.65;
 }
 
+/* ── MOBILE: layout vertical ── */
 @media (max-width: 768px) {
   .processo {
     padding: 80px 0;
   }
 
-  .steps {
-    grid-template-columns: 1fr 1fr;
+  .inner {
+    padding: 0 32px;
   }
 
-  .steps::before {
-    display: none;
+  /* Flex coluna em vez de grid */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: unset;
+  }
+
+  /* Linha conectora vertical — animada via scaleY no scroll */
+  .connector {
+    position: absolute;
+    left: 19px;          /* centro do dot: left 13px + raio 6px = 19px */
+    top: 0;
+    bottom: 0;
+    right: auto;
+    width: 1px;
+    height: auto;
+    background: repeating-linear-gradient(
+      to bottom,
+      #666 0,
+      #666 6px,
+      transparent 6px,
+      transparent 12px
+    );
+    transform-origin: top center;
+  }
+
+  /* Step: coluna, alinhado à esquerda, com recuo para dar espaço ao dot */
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 0 0 52px 50px;
+    padding-top: 0;
+  }
+
+  .step:last-child {
+    padding-bottom: 0;
+  }
+
+  /* Dot posicionado na vertical, alinhado com a linha */
+  .stepDot {
+    left: 13px;          /* centro: 13 + 6 = 19px, alinha com connector left 19px */
+    top: 3px;
+    transform: none;
+  }
+
+  /* Num: reset do offset do desktop */
+  .stepNum {
+    position: static;
+    top: auto;
+    font-size: 0.65rem;
+    margin-bottom: 6px;
+  }
+
+  .stepName {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  .stepDesc {
+    font-size: 0.84rem;
   }
 }
