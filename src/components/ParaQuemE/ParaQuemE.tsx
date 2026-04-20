@@ -29,6 +29,16 @@ export default function ParaQuemE() {
 
   return (
     <section className={styles.paraqueme} ref={sectionRef}>
+      <div className={styles.bgWrap}>
+        <img
+          src="/images/paraqueme-bg.jpg"
+          alt=""
+          aria-hidden="true"
+          className={styles.bgImg}
+        />
+        <div className={styles.bgPlaceholder} />
+      </div>
+      <div className={styles.bgOverlay} />
       <div className={styles.inner}>
         <h2 className={styles.headline} ref={headlineRef}>
           A <span className={styles.highlight}>ELEVA</span> É PARA QUEM JÁ ENTENDEU QUE{' '}

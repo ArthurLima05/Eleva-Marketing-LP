@@ -27,6 +27,16 @@ export default function CTAFinal() {
 
   return (
     <section className={styles.ctafinal} ref={sectionRef}>
+      <div className={styles.bgWrap}>
+        <img
+          src="/images/ctafinal-bg.jpg"
+          alt=""
+          aria-hidden="true"
+          className={styles.bgImg}
+        />
+        <div className={styles.bgPlaceholder} />
+      </div>
+      <div className={styles.bgOverlay} />
       <div className={styles.inner}>
         <hr className={styles.rule} />
         <h2 className={styles.headline} ref={headlineRef}>

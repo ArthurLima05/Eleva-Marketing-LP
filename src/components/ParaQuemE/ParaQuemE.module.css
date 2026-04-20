@@ -1,6 +1,52 @@
 .paraqueme {
   background: #0a0a0a;
   padding: 10vw 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.bgWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bgImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(100%) contrast(1.1);
+  opacity: 0.25;
+}
+
+.bgPlaceholder {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    #111 0px,
+    #111 10px,
+    #1a1a1a 10px,
+    #1a1a1a 20px
+  );
+  opacity: 0.5;
+}
+
+.bgImg[src="/images/paraqueme-bg.jpg"] ~ .bgPlaceholder {
+  display: none;
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,10,10,0.7) 0%,
+    rgba(10,10,10,0.5) 50%,
+    rgba(10,10,10,0.7) 100%
+  );
 }
 
 .inner {
@@ -8,6 +54,8 @@
   margin: 0 auto;
   padding: 0 40px;
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .headline {

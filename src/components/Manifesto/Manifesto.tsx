@@ -40,15 +40,27 @@ export default function Manifesto() {
       </div>
 
       <div className={styles.inner}>
-        <p className={styles.text} ref={text1Ref}>
-          <em>Enquanto a maioria segue a multidão,</em>{' '}
-          <strong>nossos clientes se destacam dela.</strong>
-        </p>
-        <p className={styles.text} ref={text2Ref}>
-          <em>não entregamos serviços...</em>{' '}
-          <strong>construímos marcas</strong>{' '}
-          <em>que o mercado não consegue ignorar.</em>
-        </p>
+        <div className={styles.textCol}>
+          <p className={styles.text} ref={text1Ref}>
+            <em>Enquanto a maioria segue a multidão,</em>{' '}
+            <strong>nossos clientes se destacam dela.</strong>
+          </p>
+          <p className={styles.text} ref={text2Ref}>
+            Não entregamos serviços —{' '}
+            <strong>construímos marcas</strong>{' '}
+            que o mercado para de ignorar.
+          </p>
+        </div>
+        <div className={styles.imageCol}>
+          <img
+            src="/images/manifesto-equipe.jpg"
+            alt="Equipe Eleva em produção"
+            className={styles.image}
+          />
+          <div className={styles.imagePlaceholder}>
+            <span>manifesto-equipe.jpg</span>
+          </div>
+        </div>
       </div>
 
       <div className={styles.signature} ref={signatureRef}>

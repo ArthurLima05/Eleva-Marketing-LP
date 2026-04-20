@@ -68,6 +68,16 @@ export default function Diferenciais() {
             a Eleva constrói uma parceria estruturada
             para crescimento real.
           </p>
+          <div className={styles.imageWrap}>
+            <img
+              src="/images/diferenciais-equipe.jpg"
+              alt="Equipe Eleva"
+              className={styles.image}
+            />
+            <div className={styles.imagePlaceholder}>
+              <span>diferenciais-equipe.jpg</span>
+            </div>
+          </div>
         </div>
 
         {/* Coluna direita — lista */}

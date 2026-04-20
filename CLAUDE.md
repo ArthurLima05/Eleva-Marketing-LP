@@ -21,7 +21,7 @@
 - Títulos: uppercase, font-style: italic, letter-spacing: 0.115em
 - Palavra de destaque no título: font-style: normal, font-weight: 700,
   letter-spacing: 0.001em, text-decoration: underline
-- Subtítulos: uppercase, italic, letter-spacing: 0.115em
+- Subtítulos: uppercase, italic, letter-spacing: 0.07em
 - Parágrafos: lowercase, letter-spacing: 0, line-height: 1.1
 
 ## Estrutura de componentes
