@@ -68,22 +68,12 @@ export default function Diferenciais() {
             a Eleva constrói uma parceria estruturada
             para crescimento real.
           </p>
-          <div className={styles.imageWrap}>
-            <img
-              src="/images/diferenciais-equipe.jpg"
-              alt="Equipe Eleva"
-              className={styles.image}
-            />
-            <div className={styles.imagePlaceholder}>
-              <span>diferenciais-equipe.jpg</span>
-            </div>
-          </div>
         </div>
 
         {/* Coluna direita — lista */}
         <div className={styles.right}>
           {DIFERENCIAIS.map((d) => (
-            <div className={styles.item} key={d.num}>
+            <div className={styles.item} key={d.num} data-num={d.num}>
               <span className={styles.num}>{d.num}</span>
               <div className={styles.itemContent}>
                 <h3 className={styles.itemTitle}>{d.title}</h3>
@@ -94,6 +84,15 @@ export default function Diferenciais() {
         </div>
 
       </div>
+
+      <div className={styles.imageWrap}>
+        <img
+          src="/images/diferenciais-equipe.jpg"
+          alt="Equipe Eleva"
+          className={styles.image}
+        />
+      </div>
+
     </section>
   );
 }

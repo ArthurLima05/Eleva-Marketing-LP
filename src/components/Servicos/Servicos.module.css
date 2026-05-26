@@ -1,5 +1,5 @@
 .servicos {
-  background: #ffffff;
+  background: #0a0a0a;
   padding: 8vw 0 0;
   overflow: hidden;
 }
@@ -15,7 +15,7 @@
   display: block;
   font-size: 0.62rem;
   letter-spacing: 0.28em;
-  color: #999;
+  color: #555;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
 }
@@ -26,7 +26,7 @@
   font-weight: 400;
   letter-spacing: 0.115em;
   text-transform: uppercase;
-  color: #0a0a0a;
+  color: #ffffff;
 }
 
 .title strong {
@@ -44,7 +44,7 @@
   height: 70vh;
   min-height: 480px;
   max-height: 680px;
-  border-top: 1px solid #222;
+  border-top: 1px solid #2a2a2a;
   width: 100%;
   overflow: hidden;
 }
@@ -66,9 +66,9 @@
   border-right: none;
 }
 
-/* 7 paineis: 1 ativo + 6 inativos × 80px = 480px */
+/* 8 paineis: 1 ativo + 7 inativos × 80px = 560px */
 .panelActive {
-  width: calc(100% - 480px);
+  width: calc(100% - 560px);
   flex-shrink: 0;
   flex-grow: 0;
 }
@@ -194,8 +194,12 @@
   overflow: hidden;
 }
 
-/* ── MOBILE LIST ── */
-.mobileList {
+/* ── CARROSSEL MOBILE ── */
+.carousel {
+  display: none;
+}
+
+.dots {
   display: none;
 }
 
@@ -204,73 +208,96 @@
     display: none;
   }
 
-  .mobileList {
+  .header {
+    padding: 0 24px 32px;
+  }
+
+  /* Carrossel */
+  .carousel {
     display: flex;
-    flex-direction: column;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 12px;
+    padding: 0 24px 0 24px;
+    /* Peek do próximo card */
+    padding-right: calc(18vw + 12px);
   }
 
-  .mobileCard {
-    border-bottom: 1px solid #e0e0e0;
-    overflow: hidden;
-  }
-
-  .mobileCard:first-child {
-    border-top: 1px solid #e0e0e0;
-  }
-
-  .mobileMedia {
-    position: relative;
-    aspect-ratio: 4 / 3;
-    background: #111;
-    overflow: hidden;
-  }
-
-  .mobileImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%) contrast(1.1);
-    display: block;
-  }
-
-  /* Placeholder se imagem não existir */
-  .mobilePlaceholder {
-    position: absolute;
-    inset: 0;
-    background: #1a1a1a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .mobileImg[src] ~ .mobilePlaceholder {
+  .carousel::-webkit-scrollbar {
     display: none;
   }
 
-  .mobileContent {
-    padding: 24px 20px 28px;
-    background: #ffffff;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  .carouselCard {
+    scroll-snap-align: start;
+    flex: 0 0 82vw;
+    background: #111;
+    overflow: hidden;
+    border-radius: 2px;
   }
 
-  .mobileName {
-    font-size: 1rem;
+  .carouselMedia {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+
+  .carouselImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%) contrast(1.05);
+  }
+
+  .carouselContent {
+    padding: 18px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .carouselName {
+    font-size: 0.88rem;
     font-weight: 700;
-    color: #0a0a0a;
-    letter-spacing: 0.05em;
+    font-style: italic;
+    color: #ffffff;
+    letter-spacing: 0.115em;
     text-transform: uppercase;
   }
 
-  .mobileDesc {
-    font-size: 0.88rem;
-    color: #555;
-    line-height: 1.65;
+  .carouselDesc {
+    font-size: 0.8rem;
+    color: #888;
+    line-height: 1.6;
     letter-spacing: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  .header {
-    padding: 0 24px 32px;
+  /* Dots */
+  .dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 0 32px;
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #333;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+
+  .dotActive {
+    background: #ffffff;
+    transform: scale(1.4);
   }
 }

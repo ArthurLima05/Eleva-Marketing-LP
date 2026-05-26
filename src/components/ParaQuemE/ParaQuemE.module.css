@@ -101,4 +101,18 @@
   .paraqueme {
     padding: 80px 0;
   }
+
+  .inner {
+    padding: 0 24px;
+  }
+
+  .headline {
+    font-size: clamp(1.3rem, 5.5vw, 1.8rem);
+    margin-bottom: 2rem;
+  }
+
+  .body {
+    font-size: 0.92rem;
+    line-height: 1.75;
+  }
 }

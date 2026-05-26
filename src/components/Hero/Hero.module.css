@@ -207,23 +207,25 @@
   }
 
   .titleLine1 {
-    font-size: clamp(1.1rem, 5.5vw, 1.6rem);
+    font-size: clamp(1rem, 5vw, 1.5rem);
   }
 
   .titleLine2 {
-    font-size: clamp(3.5rem, 18vw, 5.5rem);
+    font-size: clamp(3rem, 15vw, 5rem);
   }
 
   .subtitle {
-    font-size: 0.68rem;
-    max-width: 90vw;
-    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    max-width: 88vw;
+    letter-spacing: 0.1em;
+    margin-top: 1.25rem;
   }
 
   .ctaButton {
     cursor: pointer;
+    margin-top: 2rem;
     padding: 14px 32px;
-    font-size: 0.68rem;
+    font-size: 0.7rem;
     letter-spacing: 0.18em;
   }
 

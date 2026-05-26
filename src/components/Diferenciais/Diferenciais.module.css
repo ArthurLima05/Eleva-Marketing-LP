@@ -1,6 +1,6 @@
 .diferenciais {
   background: #ffffff;
-  padding: 10vw 0;
+  padding: 10vw 0 8vw;
 }
 
 .inner {
@@ -8,8 +8,8 @@
   margin: 0 auto;
   padding: 0 60px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8vw;
+  grid-template-columns: 2fr 3fr;
+  gap: 6vw;
   align-items: start;
 }
 
@@ -65,8 +65,8 @@
 
 .item {
   display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: 24px;
+  grid-template-columns: 72px 1fr;
+  gap: 20px;
   padding: 40px 0;
   border-bottom: 1px solid #e8e8e8;
   align-items: start;
@@ -85,37 +85,39 @@
 }
 
 .num {
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  color: #bbb;
-  padding-top: 4px;
-  font-weight: 500;
+  font-size: 2.4rem;
+  letter-spacing: -0.03em;
+  color: #e4e4e4;
+  font-weight: 300;
+  line-height: 1;
+  padding-top: 2px;
+  transition: color 0.3s ease;
 }
 
 .itemContent {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  transition: transform 0.3s ease;
 }
 
 .itemTitle {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #0a0a0a;
   letter-spacing: 0.02em;
 }
 
 .itemDesc {
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.7;
+  font-size: 0.88rem;
+  color: #777;
+  line-height: 1.75;
   letter-spacing: 0;
 }
 
 /* ── HOVER no item ── */
 .item:hover .num {
   color: #0a0a0a;
-  transition: color 0.3s ease;
 }
 
 .item:hover .itemTitle {
@@ -124,63 +126,110 @@
   text-decoration-thickness: 1px;
 }
 
+.item:hover .itemContent {
+  transform: translateX(4px);
+  transition: transform 0.3s ease;
+}
+
+
+/* ── IMAGEM PANORÂMICA (fora do grid) ── */
 .imageWrap {
-  position: relative;
-  margin-top: 2.5rem;
-  aspect-ratio: 3 / 4;
+  max-width: 720px;
+  margin: 6vw auto 0;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
   background: #f0f0f0;
-  max-width: 320px;
 }
 
 .image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   filter: grayscale(100%) contrast(1.05);
   display: block;
+  transition: transform 0.7s ease;
 }
 
-.imagePlaceholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #eeeeee;
-  border: 1px dashed #ccc;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  color: #aaa;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 1rem;
+.imageWrap:hover .image {
+  transform: scale(1.03);
 }
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
+  .diferenciais {
+    padding: 14vw 0 16vw;
+  }
+
   .inner {
     grid-template-columns: 1fr;
-    gap: 48px;
-    padding: 0 24px;
+    gap: 0;
+    padding: 0;
   }
 
   .left {
     position: static;
+    padding: 0 24px;
+    margin-bottom: 40px;
   }
 
   .subtitle {
     max-width: 100%;
+    font-size: 0.88rem;
+  }
+
+  /* Oculta imagem no mobile — não agrega valor na tela pequena */
+  .imageWrap {
+    display: none;
+  }
+
+  /* Items como cards com borda esquerda */
+  .right {
+    border-top: 1px solid #e8e8e8;
   }
 
   .item {
-    grid-template-columns: 36px 1fr;
-    gap: 16px;
-    padding: 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px;
+    border-bottom: 1px solid #e8e8e8;
+    border-left: none;
+    position: relative;
+    grid-template-columns: unset;
   }
 
-  .imageWrap {
-    max-width: 100%;
-    aspect-ratio: 4 / 3;
+  .item::before {
+    content: attr(data-num);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1;
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    letter-spacing: -0.04em;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .num {
+    display: none;
+  }
+
+  .itemContent {
+    gap: 8px;
+    padding-right: 48px;
+  }
+
+  .itemTitle {
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+  }
+
+  .itemDesc {
+    font-size: 0.84rem;
+    color: #777;
+    line-height: 1.65;
   }
 }

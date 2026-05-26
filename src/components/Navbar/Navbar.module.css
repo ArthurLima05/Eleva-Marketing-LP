@@ -95,16 +95,16 @@
 @media (max-width: 768px) {
   .inner {
     padding: 0 20px;
-    height: 56px;
+    height: 80px;
   }
 
   .logoImg {
-    height: 90px;
+    height: 100px;
   }
 
   .ctaBtn {
-    font-size: 0.6rem;
-    padding: 8px 16px;
+    font-size: 0.62rem;
+    padding: 9px 18px;
     letter-spacing: 0.15em;
   }
 }
