@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import logoSrc from '../../assets/logo/eleva-logo.png';
 import styles from './Navbar.module.css';
 
 const WHATSAPP_URL =
@@ -28,7 +29,7 @@ export default function Navbar() {
         {/* Logo */}
         <a href="#" className={styles.logoWrap} aria-label="Eleva Marketing">
           <img
-            src="/src/assets/logo/eleva-logo.png"
+            src={logoSrc}
             alt="Eleva Marketing"
             className={styles.logoImg}
           />
