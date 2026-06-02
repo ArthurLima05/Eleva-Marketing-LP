@@ -7,9 +7,9 @@ import styles from './Problema.module.css'
 gsap.registerPlugin(ScrollTrigger)
 
 const dores = [
-  { ordinal: '01', text: 'Seu negócio existe há anos, mas ninguém parece notar.' },
-  { ordinal: '02', text: 'Você investe em redes sociais, mas os posts somem no feed sem resultado.' },
-  { ordinal: '03', text: 'Já tentou de tudo — e nada mudou de verdade.' },
+  { ordinal: '01', text: 'Seu negócio existe há anos, mas ninguém lembra da sua marca.' },
+  { ordinal: '02', text: 'Enquanto seus concorrentes aparecem todos os dias, a sua marca continua invisível.' },
+  { ordinal: '03', text: 'Quem não é visto, dificilmente é escolhido. Sua empresa não precisa de mais posts. Precisa de estratégia.' },
 ]
 
 export default function Problema() {

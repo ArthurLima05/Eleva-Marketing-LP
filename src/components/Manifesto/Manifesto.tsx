@@ -46,7 +46,7 @@ export default function Manifesto() {
             <strong>se destacam</strong> dela.
           </p>
           <p className={styles.text} ref={text2Ref}>
-            Não entregamos serviços — construímos{' '}
+            Não entregamos serviços. Construímos{' '}
             <strong>marcas</strong>{' '}
             que o mercado para de ignorar.
           </p>

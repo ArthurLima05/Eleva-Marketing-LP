@@ -5,12 +5,12 @@ const DIFERENCIAIS = [
   {
     num: '01',
     title: 'Agência 360°',
-    desc: 'Estratégia, conteúdo, tráfego, branding e site — tudo integrado sob uma única direção. Você não precisa coordenar múltiplos fornecedores nem reexplicar sua marca para cada um.',
+    desc: 'Estratégia, conteúdo, tráfego, branding e site, tudo integrado sob uma única direção. Você tem um time completo focado no crescimento da sua marca, sem precisar coordenar fornecedores ou reexplicar o posicionamento da sua empresa.',
   },
   {
     num: '02',
-    title: 'Visita mensal presencial',
-    desc: 'Nossa equipe vai até você todos os meses para captação real. Nada de banco de imagens ou conteúdo genérico — sua marca é mostrada com autenticidade.',
+    title: 'Captação presencial',
+    desc: 'Realizamos visitas presenciais para captar conteúdos reais da sua empresa. Nada de imagens genéricas — mostramos sua marca com autenticidade, proximidade e estratégia.',
   },
   {
     num: '03',
@@ -19,13 +19,13 @@ const DIFERENCIAIS = [
   },
   {
     num: '04',
-    title: 'Relatório + reunião estratégica',
-    desc: 'Todo mês: dados reais, análise de resultados e planejamento do próximo ciclo. Não entregamos relatório e sumimos — sentamos com você e ajustamos a rota.',
+    title: 'Relatórios e reuniões estratégicas',
+    desc: 'Apresentamos análises de desempenho, métricas e direcionamentos estratégicos para otimizar os resultados das campanhas. Além dos relatórios, realizamos reuniões de alinhamento para acompanhar a evolução da marca e definir os próximos passos com clareza e estratégia.',
   },
   {
     num: '05',
-    title: 'Sem fidelidade forçada',
-    desc: 'Ficamos porque os resultados aparecem, não porque um contrato obriga. Nossa renovação de 98% é a prova disso.',
+    title: 'Atendimento estratégico',
+    desc: 'Acompanhamento próximo, comunicação rápida e decisões alinhadas com o objetivo da sua marca. Aqui, sua empresa não é só mais um cliente na agenda.',
   },
 ];
 
@@ -55,6 +55,16 @@ export default function Diferenciais() {
 
   return (
     <section className={styles.diferenciais}>
+
+      {/* Fundo opaco com a foto da equipe */}
+      <div className={styles.bgWrap} aria-hidden="true">
+        <img
+          src="/images/diferenciais-equipe.jpg"
+          alt=""
+          className={styles.bgImg}
+        />
+      </div>
+
       <div className={styles.inner}>
 
         {/* Coluna esquerda — título sticky */}
@@ -83,14 +93,6 @@ export default function Diferenciais() {
           ))}
         </div>
 
-      </div>
-
-      <div className={styles.imageWrap}>
-        <img
-          src="/images/diferenciais-equipe.jpg"
-          alt="Equipe Eleva"
-          className={styles.image}
-        />
       </div>
 
     </section>

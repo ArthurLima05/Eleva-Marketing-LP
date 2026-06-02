@@ -3,14 +3,14 @@ import styles from './Servicos.module.css';
 
 const SERVICES = [
   {
-    name: 'Tráfego Pago',
-    desc: 'Planejamos e gerenciamos campanhas estratégicas que conectam sua marca ao público certo, com segmentação inteligente e foco em resultado real. Cada anúncio é pensado para gerar posicionamento, oportunidades e elevar o seu faturamento com consistência e estratégia.',
-    image: '/images/servicos/trafego.png',
-  },
-  {
     name: 'Produção de Vídeo',
     desc: 'Produzimos vídeos estratégicos que contam a história da sua marca com propósito e posicionamento. Do conceito à edição final, criamos conteúdos que geram conexão, fortalecem sua autoridade e elevam o impacto da sua comunicação no digital.',
     image: '/images/servicos/producao_video.png',
+  },
+  {
+    name: 'Tráfego Pago',
+    desc: 'Planejamos e gerenciamos campanhas estratégicas que conectam sua marca ao público certo, com segmentação inteligente e foco em resultado real. Cada anúncio é pensado para gerar posicionamento, oportunidades e elevar o seu faturamento com consistência e estratégia.',
+    image: '/images/servicos/trafego.png',
   },
   {
     name: 'Design Gráfico',
@@ -23,9 +23,9 @@ const SERVICES = [
     image: '/images/servicos/gestao_de_rede.png',
   },
   {
-    name: 'Sites e Landing Pages',
-    desc: 'Criamos páginas estratégicas e otimizadas para conversão, com foco em performance, experiência do usuário e resultados reais. Um site bem estruturado posiciona sua marca com autoridade e eleva suas oportunidades de venda no digital.',
-    image: '/images/servicos/landing_page.png',
+    name: 'Edição de Vídeo',
+    desc: 'Transformamos suas gravações em conteúdos profissionais e estratégicos, com ritmo, identidade visual e narrativa alinhados ao posicionamento da sua marca. Uma edição bem executada aumenta o tempo de atenção, gera conexão com o público e potencializa o alcance dos seus vídeos.',
+    image: '/images/servicos/edicao_de_video.png',
   },
   {
     name: 'Fotografia',
@@ -38,9 +38,9 @@ const SERVICES = [
     image: '/images/servicos/drone.jpg',
   },
   {
-    name: 'Edição de Vídeo',
-    desc: 'Transformamos suas gravações em conteúdos profissionais e estratégicos, com ritmo, identidade visual e narrativa alinhados ao posicionamento da sua marca. Uma edição bem executada aumenta o tempo de atenção, gera conexão com o público e potencializa o alcance dos seus vídeos.',
-    image: '/images/servicos/edicao_de_video.png',
+    name: 'Sites e Landing Pages',
+    desc: 'Criamos páginas estratégicas e otimizadas para conversão, com foco em performance, experiência do usuário e resultados reais. Um site bem estruturado posiciona sua marca com autoridade e eleva suas oportunidades de venda no digital.',
+    image: '/images/servicos/landing_page.png',
   },
 ];
 

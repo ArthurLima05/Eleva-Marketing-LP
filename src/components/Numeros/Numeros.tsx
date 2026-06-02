@@ -6,10 +6,10 @@ import styles from './Numeros.module.css'
 gsap.registerPlugin(ScrollTrigger)
 
 const METRICS = [
-  { number: '+47',  label: 'Marcas elevadas',       suffix: '' },
-  { number: 'R$2M', label: 'Em tráfego gerenciado', suffix: '+' },
-  { number: '3',    label: 'Anos no mercado',        suffix: '' },
-  { number: '98',   label: 'Taxa de renovação',      suffix: '%' },
+  { number: '+DE 50', label: 'Marcas elevadas',                     suffix: '' },
+  { number: '1.3M',   label: 'Em tráfego gerenciado',               suffix: '' },
+  { number: '3',      label: 'Anos de experiência em marketing',     suffix: '' },
+  { number: '94',     label: 'Taxa de renovação',                    suffix: '%' },
 ]
 
 export default function Numeros() {
