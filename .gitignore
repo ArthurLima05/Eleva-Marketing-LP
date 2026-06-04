@@ -22,3 +22,6 @@ npm-debug.log*
 
 # Vídeos de depoimentos (arquivos grandes)
 public/videos/depoimentos/
+
+.vercel
+.env*

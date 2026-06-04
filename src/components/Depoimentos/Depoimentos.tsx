@@ -3,7 +3,7 @@ import styles from './Depoimentos.module.css';
 
 const DEPOIMENTOS = [
   {
-    video: '/videos/depoimentos/gigi_depoimento.MOV',
+    video: '/videos/depoimentos/gigi_depoimento.mp4',
     text: 'Sou cliente, e vários empresários amam meus conteúdos e pedem o contato da Eleva.',
     author: 'VANEIDE SANTOS',
     role: 'Moda infantil',
@@ -17,14 +17,14 @@ const DEPOIMENTOS = [
     company: 'Karol Store',
   },
   {
-    video: '/videos/depoimentos/joao_depoimento.MOV',
+    video: '/videos/depoimentos/joao_depoimento.mp4',
     text: 'Empresa que agrega e soma com a gente, temos resultados bastante significativos no tráfego, além de ser uma empresa humanizada.',
     author: 'JOÃO BRANDÃO',
     role: 'Loja de Veículos',
     company: 'HN Veículos',
   },
   {
-    video: '/videos/depoimentos/day.mp4',
+    video: '/videos/depoimentos/day_depoimento.mp4',
     text: 'Depois que vocês entraram e reformularam todo instagram da DG Corretora, a minha empresa só cresceu.',
     author: 'DAYANNE FARIAS',
     role: 'Plano de saúde e empréstimos',
