@@ -1,6 +1,6 @@
 .manifesto {
   background: #ffffff;
-  padding: 8vw 0 7vw;
+  padding: 8vw 0 14vw;
   overflow: hidden;
 }
 
@@ -122,17 +122,9 @@
 
 @media (max-width: 768px) {
   .manifesto {
-    padding: 14vw 0 0;
+    padding: 14vw 0 18vw;
   }
 
-  /* Gradiente suave de branco para o fundo escuro do Servicos */
-  .manifesto::after {
-    content: '';
-    display: block;
-    height: 90px;
-    background: linear-gradient(to bottom, #ffffff, #0a0a0a);
-    margin-top: 12vw;
-  }
 
   .labelRow,
   .signature {

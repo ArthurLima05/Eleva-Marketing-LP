@@ -14,7 +14,7 @@ const WHATSAPP_URL =
   'https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20elevar%20minha%20marca!';
 
 // Ajustar para o número exato de frames em /public/frames/
-const TOTAL_FRAMES = 240;
+const TOTAL_FRAMES = 207;
 // Frames iniciais idênticos a pular (obturador fechado estático)
 const FRAME_START = 0;
 
@@ -55,7 +55,7 @@ export default function Hero() {
 
         // Todos os textos: branco até 0.18, preto a partir de 0.20 (sem cinza)
         {
-          const start = window.innerWidth >= 768 ? 0.62 : 0.50;
+          const start = window.innerWidth >= 768 ? 0.54 : 0.43;
           const tp = Math.max(0, Math.min(1, (progress - start) / 0.2));
           const v = Math.round(255 - 235 * tp);
           const textColor = `rgb(${v},${v},${v})`;
