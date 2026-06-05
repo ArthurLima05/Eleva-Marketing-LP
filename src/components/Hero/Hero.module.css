@@ -83,7 +83,7 @@
   text-decoration: underline;
   text-underline-offset: 8px;   
   text-decoration-thickness: 2px;
-  text-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  text-shadow: none;
   line-height: 0.88;
 }
 
@@ -122,7 +122,7 @@
   max-width: 480px;
   line-height: 1.85;
   text-align: center;
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+  text-shadow: none;
 }
 
 /* ─── Botão CTA ─────────────────────────────────────────────────────── */

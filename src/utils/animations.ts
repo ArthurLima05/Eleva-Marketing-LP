@@ -96,7 +96,8 @@ export function setupCanvasScrollScrubbing(
   totalFrames: number,
   onFullyOpen: () => void,
   onClose: () => void,
-  onProgress?: (progress: number) => void
+  onProgress?: (progress: number) => void,
+  frameStart = 0
 ): () => void {
   const ctx = canvas.getContext('2d')!;
   if (!ctx) return () => undefined;
@@ -104,7 +105,7 @@ export function setupCanvasScrollScrubbing(
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
 
-  const EAGER_COUNT = Math.min(40, totalFrames);
+  const EAGER_COUNT = totalFrames;
   const LERP_FACTOR = 0.08; // suavização do progresso entre frames
 
   // Array de imagens pré-alocado — nunca cria new Image() durante o scroll
@@ -153,7 +154,7 @@ export function setupCanvasScrollScrubbing(
       const diff = targetProgress - lerpedProgress;
       if (Math.abs(diff) > 0.0003) {
         lerpedProgress += diff * LERP_FACTOR;
-        const nextIdx = Math.round(lerpedProgress * (totalFrames - 1));
+        const nextIdx = Math.round(frameStart + lerpedProgress * (totalFrames - 1 - frameStart));
         // Só redesenha se o frame mudou — evita drawImage desnecessário
         if (nextIdx !== currentFrameIdx || lerpedProgress !== targetProgress) {
           currentFrameIdx = nextIdx;

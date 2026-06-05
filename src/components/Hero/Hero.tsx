@@ -4,7 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   setupCanvasScrollScrubbing,
   setupScrollIndicatorHide,
-  setupSubtitleCtaColorTransition,
 } from '../../utils/animations';
 import { setupMagneticButton } from '../../utils/cursor';
 import styles from './Hero.module.css';
@@ -16,6 +15,8 @@ const WHATSAPP_URL =
 
 // Ajustar para o número exato de frames em /public/frames/
 const TOTAL_FRAMES = 240;
+// Frames iniciais idênticos a pular (obturador fechado estático)
+const FRAME_START = 0;
 
 const LINE_1_WORDS = ['MARCAS', 'INVISÍVEIS', 'NÃO'];
 const LINE_2_HIGHLIGHT = ['VENDEM'];
@@ -27,6 +28,7 @@ export default function Hero() {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLButtonElement>(null);
   const flashRef = useRef<HTMLDivElement>(null);
+  const titleBlockRef = useRef<HTMLDivElement>(null);
 
   // ─── Canvas scrubbing + scroll indicator ────────────────────────────
   useEffect(() => {
@@ -51,15 +53,25 @@ export default function Hero() {
           flashRef.current.style.opacity = String(p);
         }
 
-        // Fade do conteúdo: some entre 20% e 70%
-        const content = document.querySelector('[class*="content_"]') as HTMLElement;
-        if (content) {
-          const fadeStart = 0.2;
-          const fadeEnd = 0.7;
-          const fadeProgress = Math.max(0, Math.min(1,
-            (progress - fadeStart) / (fadeEnd - fadeStart)
-          ));
-          content.style.opacity = String(1 - fadeProgress);
+        // Todos os textos: branco até 0.18, preto a partir de 0.20 (sem cinza)
+        {
+          const start = window.innerWidth >= 768 ? 0.62 : 0.50;
+          const tp = Math.max(0, Math.min(1, (progress - start) / 0.2));
+          const v = Math.round(255 - 235 * tp);
+          const textColor = `rgb(${v},${v},${v})`;
+
+          if (titleBlockRef.current) {
+            titleBlockRef.current.querySelectorAll<HTMLElement>('span, p').forEach(el => {
+              el.style.color = textColor;
+            });
+          }
+          if (subtitleRef.current) {
+            subtitleRef.current.style.color = textColor;
+          }
+          if (ctaRef.current) {
+            ctaRef.current.style.color = textColor;
+            ctaRef.current.style.borderColor = textColor;
+          }
         }
 
         // Body: branco só quando flash está completo
@@ -68,19 +80,9 @@ export default function Hero() {
         } else if (progress < 0.75) {
           document.body.style.backgroundColor = '#0a0a0a';
         }
-      }
+      },
+      FRAME_START
     );
-
-    const cleanupColorTransition =
-      subtitleRef.current && ctaRef.current
-        ? setupSubtitleCtaColorTransition(
-            subtitleRef.current,
-            ctaRef.current,
-            hero,
-            TOTAL_FRAMES,
-            125
-          )
-        : () => undefined;
 
     const cleanupIndicator = indicator
       ? setupScrollIndicatorHide(indicator)
@@ -88,13 +90,20 @@ export default function Hero() {
 
     return () => {
       cleanupScrub();
-      cleanupColorTransition();
       cleanupIndicator();
       if (flashRef.current) flashRef.current.style.opacity = '0';
+      if (titleBlockRef.current) {
+        titleBlockRef.current.querySelectorAll<HTMLElement>('span, p').forEach(el => {
+          el.style.color = '';
+        });
+      }
+      if (subtitleRef.current) subtitleRef.current.style.color = '';
+      if (ctaRef.current) {
+        ctaRef.current.style.color = '';
+        ctaRef.current.style.borderColor = '';
+      }
       document.body.style.backgroundColor = '#0a0a0a';
       document.body.style.transition = '';
-      const content = document.querySelector('[class*="content_"]') as HTMLElement;
-      if (content) content.style.opacity = '1';
     };
   }, []);
 
@@ -120,7 +129,7 @@ export default function Hero() {
 
         {/* Camada 3 — conteúdo centralizado */}
         <div className={styles.content}>
-          <div className={styles.titleBlock}>
+          <div className={styles.titleBlock} ref={titleBlockRef}>
 
             <p className={styles.titleLine1}>
               {LINE_1_WORDS.map((word) => (
